@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class WorldCupScoreboard {
     private List<Match> currentMatches = new ArrayList<>();
+    private List<Match> completedMatches = new ArrayList<>();
     
     public List<Match> getCurrentMatches() {
         return currentMatches;
@@ -24,6 +25,14 @@ public class WorldCupScoreboard {
         Match match = new Match(homeTeam, awayTeam);
         
         currentMatches.add(match);
+    }
+    
+    public void finishMatch(Match toFinish) {
+        toFinish.finishMatch();
+        
+        completedMatches.add(toFinish);
+        
+        currentMatches.remove(toFinish);
     }
 
     public static void main(String[] args) {
