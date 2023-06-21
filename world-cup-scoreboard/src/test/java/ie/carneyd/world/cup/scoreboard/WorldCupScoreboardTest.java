@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -133,7 +134,7 @@ public class WorldCupScoreboardTest {
     }
     
     @Test
-    public void endToEndTest_CompletedMatches() throws MatchException {
+    public void firstHalfTest_CurrentMatchesHasThreeMatches() throws MatchException {
         WorldCupScoreboard worldCupScoreboard = new WorldCupScoreboard();
         
         Team uruguay = new Team("URU", "Uruguay");
@@ -169,34 +170,162 @@ public class WorldCupScoreboardTest {
                 .incrementHomeScore(9, "Wood", 
                         matches.get(2).getMatchStart().plusMinutes(27));
         
-        for(Match m : matches) {
-            m.startSecondHalf();
-        }
-        
-        matches.get(2)
-                .incrementAwayScore(9, "Drogba", 
-                        matches.get(2).getSecondHalfStart().plusMinutes(8));
-        
-        matches.get(1)
-                .incrementHomeScore(4, "Pedri", 
-                        matches.get(1).getSecondHalfStart().plusMinutes(15));
-        
-        matches.get(0)
-                .incrementAwayScore(11, "Quagliarella", 
-                        matches.get(0).getSecondHalfStart().plusMinutes(23));
-        
-        for(Match m : matches) {
-            worldCupScoreboard.finishMatch(m);
-        }
-        
-        assertEquals(3, worldCupScoreboard.getCompletedMatches());
+        assertEquals(3, worldCupScoreboard.getCurrentMatches().size());
     }
     
     @Test
-    public void endToEndTest_CurrentMatches() throws MatchException {
+    public void firstHalfTest_CompletedMatchesEmpty() throws MatchException {
         WorldCupScoreboard worldCupScoreboard = new WorldCupScoreboard();
         
-        Team uruguay = new Team("URU", "Uruguay");
+        Team italy = new Team("ITA", "Italy");
+        
+        worldCupScoreboard.startMatch(uruguay, italy);
+        
+        Team spain = new Team("ESP", "Spain");
+        Team southAfrica = new Team("RSA", "South Africa");
+        
+        worldCupScoreboard.startMatch(spain, southAfrica);
+        
+        Team newZealand = new Team("NZL", "New Zealand");
+        Team ivoryCoast = new Team("CIV", "Cote d'Ivoire");
+        
+        worldCupScoreboard.startMatch(newZealand, ivoryCoast);
+        
+        List<Match> matches = worldCupScoreboard.getCurrentMatches();
+        
+        matches.get(0)
+                .incrementHomeScore(10, "Suarez",
+                        matches.get(0).getMatchStart().plusMinutes(6));
+        
+        matches.get(1)
+                .incrementAwayScore(9, "McCarthy",
+                        matches.get(1).getMatchStart().plusMinutes(17));
+        
+        matches.get(1)
+                .incrementHomeScore(10, "Joselu",
+                        matches.get(1).getMatchStart().plusMinutes(22));
+        
+        matches.get(2)
+                .incrementHomeScore(9, "Wood", 
+                        matches.get(2).getMatchStart().plusMinutes(27));
+        
+        assertTrue(worldCupScoreboard.getCompletedMatches().isEmpty());
+    }
+    
+    @Test
+    public void completeOneMatch_CompletedMatchesHasOneMatch() throws MatchException {
+        WorldCupScoreboard worldCupScoreboard = new WorldCupScoreboard();
+        
+        Team italy = new Team("ITA", "Italy");
+        
+        worldCupScoreboard.startMatch(uruguay, italy);
+        
+        Team spain = new Team("ESP", "Spain");
+        Team southAfrica = new Team("RSA", "South Africa");
+        
+        worldCupScoreboard.startMatch(spain, southAfrica);
+        
+        Team newZealand = new Team("NZL", "New Zealand");
+        Team ivoryCoast = new Team("CIV", "Cote d'Ivoire");
+        
+        worldCupScoreboard.startMatch(newZealand, ivoryCoast);
+        
+        worldCupScoreboard.getCurrentMatches().get(0)
+                .incrementHomeScore(10, "Suarez",
+                        worldCupScoreboard.getCurrentMatches().get(0).getMatchStart().plusMinutes(6));
+        
+        worldCupScoreboard.getCurrentMatches().get(1)
+                .incrementAwayScore(9, "McCarthy",
+                        worldCupScoreboard.getCurrentMatches().get(1).getMatchStart().plusMinutes(17));
+        
+        worldCupScoreboard.getCurrentMatches().get(1)
+                .incrementHomeScore(10, "Joselu",
+                        worldCupScoreboard.getCurrentMatches().get(1).getMatchStart().plusMinutes(22));
+        
+        worldCupScoreboard.getCurrentMatches().get(2)
+                .incrementHomeScore(9, "Wood", 
+                        worldCupScoreboard.getCurrentMatches().get(2).getMatchStart().plusMinutes(27));
+        
+        for(Match m : worldCupScoreboard.getCurrentMatches()) {
+            m.startSecondHalf();
+        }
+        
+        worldCupScoreboard.getCurrentMatches().get(2)
+                .incrementAwayScore(9, "Drogba", 
+                        worldCupScoreboard.getCurrentMatches().get(2).getSecondHalfStart().plusMinutes(8));
+        
+        worldCupScoreboard.getCurrentMatches().get(1)
+                .incrementHomeScore(4, "Pedri", 
+                        worldCupScoreboard.getCurrentMatches().get(1).getSecondHalfStart().plusMinutes(15));
+        
+        worldCupScoreboard.getCurrentMatches().get(0)
+                .incrementAwayScore(11, "Quagliarella", 
+                        worldCupScoreboard.getCurrentMatches().get(0).getSecondHalfStart().plusMinutes(23));
+        
+        worldCupScoreboard.finishMatch(worldCupScoreboard.getCurrentMatches().get(1));
+        
+        assertEquals(1, worldCupScoreboard.getCompletedMatches().size());
+    }
+    
+    @Test
+    public void completeOneMatch_CurrentMatchesHasTwoMatches() throws MatchException {
+        WorldCupScoreboard worldCupScoreboard = new WorldCupScoreboard();
+        
+        Team italy = new Team("ITA", "Italy");
+        
+        worldCupScoreboard.startMatch(uruguay, italy);
+        
+        Team spain = new Team("ESP", "Spain");
+        Team southAfrica = new Team("RSA", "South Africa");
+        
+        worldCupScoreboard.startMatch(spain, southAfrica);
+        
+        Team newZealand = new Team("NZL", "New Zealand");
+        Team ivoryCoast = new Team("CIV", "Cote d'Ivoire");
+        
+        worldCupScoreboard.startMatch(newZealand, ivoryCoast);
+        
+        worldCupScoreboard.getCurrentMatches().get(0)
+                .incrementHomeScore(10, "Suarez",
+                        worldCupScoreboard.getCurrentMatches().get(0).getMatchStart().plusMinutes(6));
+        
+        worldCupScoreboard.getCurrentMatches().get(1)
+                .incrementAwayScore(9, "McCarthy",
+                        worldCupScoreboard.getCurrentMatches().get(1).getMatchStart().plusMinutes(17));
+        
+        worldCupScoreboard.getCurrentMatches().get(1)
+                .incrementHomeScore(10, "Joselu",
+                        worldCupScoreboard.getCurrentMatches().get(1).getMatchStart().plusMinutes(22));
+        
+        worldCupScoreboard.getCurrentMatches().get(2)
+                .incrementHomeScore(9, "Wood", 
+                        worldCupScoreboard.getCurrentMatches().get(2).getMatchStart().plusMinutes(27));
+        
+        for(Match m : worldCupScoreboard.getCurrentMatches()) {
+            m.startSecondHalf();
+        }
+        
+        worldCupScoreboard.getCurrentMatches().get(2)
+                .incrementAwayScore(9, "Drogba", 
+                        worldCupScoreboard.getCurrentMatches().get(2).getSecondHalfStart().plusMinutes(8));
+        
+        worldCupScoreboard.getCurrentMatches().get(1)
+                .incrementHomeScore(4, "Pedri", 
+                        worldCupScoreboard.getCurrentMatches().get(1).getSecondHalfStart().plusMinutes(15));
+        
+        worldCupScoreboard.getCurrentMatches().get(0)
+                .incrementAwayScore(11, "Quagliarella", 
+                        worldCupScoreboard.getCurrentMatches().get(0).getSecondHalfStart().plusMinutes(23));
+        
+        worldCupScoreboard.finishMatch(worldCupScoreboard.getCurrentMatches().get(1));
+        
+        assertEquals(2, worldCupScoreboard.getCurrentMatches().size());
+    }
+    
+    @Test
+    public void endToEndTest_CurrentMatchesEmpty() throws MatchException {
+        WorldCupScoreboard worldCupScoreboard = new WorldCupScoreboard();
+        
         Team italy = new Team("ITA", "Italy");
         
         worldCupScoreboard.startMatch(uruguay, italy);
@@ -245,10 +374,69 @@ public class WorldCupScoreboardTest {
                 .incrementAwayScore(11, "Quagliarella", 
                         matches.get(0).getSecondHalfStart().plusMinutes(23));
         
-        for(Match m : matches) {
-            worldCupScoreboard.finishMatch(m);
+        for(int i = matches.size() - 1; i >= 0; i--) {
+            worldCupScoreboard.finishMatch(matches.get(i));
         }
         
         assertTrue(worldCupScoreboard.getCurrentMatches().isEmpty());
+    }
+    
+    @Test
+    public void endToEndTest_CompletedMatchesNotEmpty() throws MatchException {
+        WorldCupScoreboard worldCupScoreboard = new WorldCupScoreboard();
+        
+        Team italy = new Team("ITA", "Italy");
+        
+        worldCupScoreboard.startMatch(uruguay, italy);
+        
+        Team spain = new Team("ESP", "Spain");
+        Team southAfrica = new Team("RSA", "South Africa");
+        
+        worldCupScoreboard.startMatch(spain, southAfrica);
+        
+        Team newZealand = new Team("NZL", "New Zealand");
+        Team ivoryCoast = new Team("CIV", "Cote d'Ivoire");
+        
+        worldCupScoreboard.startMatch(newZealand, ivoryCoast);
+        
+        List<Match> matches = worldCupScoreboard.getCurrentMatches();
+        
+        matches.get(0)
+                .incrementHomeScore(10, "Suarez",
+                        matches.get(0).getMatchStart().plusMinutes(6));
+        
+        matches.get(1)
+                .incrementAwayScore(9, "McCarthy",
+                        matches.get(1).getMatchStart().plusMinutes(17));
+        
+        matches.get(1)
+                .incrementHomeScore(10, "Joselu",
+                        matches.get(1).getMatchStart().plusMinutes(22));
+        
+        matches.get(2)
+                .incrementHomeScore(9, "Wood", 
+                        matches.get(2).getMatchStart().plusMinutes(27));
+        
+        for(Match m : matches) {
+            m.startSecondHalf();
+        }
+        
+        matches.get(2)
+                .incrementAwayScore(9, "Drogba", 
+                        matches.get(2).getSecondHalfStart().plusMinutes(8));
+        
+        matches.get(1)
+                .incrementHomeScore(4, "Pedri", 
+                        matches.get(1).getSecondHalfStart().plusMinutes(15));
+        
+        matches.get(0)
+                .incrementAwayScore(11, "Quagliarella", 
+                        matches.get(0).getSecondHalfStart().plusMinutes(23));
+        
+        for(int i = matches.size() - 1; i >= 0; i--) {
+            worldCupScoreboard.finishMatch(matches.get(i));
+        }
+        
+        assertEquals(3, worldCupScoreboard.getCompletedMatches().size());
     }
 }
