@@ -49,12 +49,14 @@ public class WorldCupScoreboard {
     }
     
     public void printFullScoreboard(List<Match> matches) {
+        System.out.println("World Cup Scoreboard");
         for(Match match : matches) {
             System.out.println(match.toFullString());
         }
     }
     
     public void printScoreboard(List<Match> matches) {
+        System.out.println("World Cup Scoreboard");
         for(Match match : matches) {
             System.out.println(match.toString());
         }
