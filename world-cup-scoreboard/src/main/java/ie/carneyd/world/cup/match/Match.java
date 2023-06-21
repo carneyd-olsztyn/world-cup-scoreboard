@@ -17,8 +17,9 @@ import java.util.ArrayList;
  */
 public class Match {
     private int homeScore, awayScore, totalScore;
-    private Team homeTeam, awayTeam;
-    private LocalDateTime matchStart, secondHalfStart, matchEnd;
+    private final Team homeTeam, awayTeam;
+    private final LocalDateTime matchStart;
+    private LocalDateTime secondHalfStart, matchEnd;
     ArrayList<MatchGoal> goals;
     
     public Match(Team homeTeam, Team awayTeam) {
@@ -115,24 +116,6 @@ public class Match {
             throw new MatchException("Match is not in progress");
         }
     }
-    
-//    public void disallowHomeGoal(int number, String name) {
-//        if(matchEnd != null) {
-//            homeScore--;
-//            totalScore--;
-//        } else {
-//            // Match is over
-//        }
-//    }
-//    
-//    public void disallowAwayGoal(int number, String name) {
-//        if(matchEnd != null) {
-//            awayScore--;
-//            totalScore--;
-//        } else {
-//            // Match is over
-//        }
-//    }
 
     @Override
     public String toString() {

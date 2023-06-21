@@ -5,7 +5,6 @@
 package ie.carneyd.world.cup.match.update;
 
 import ie.carneyd.world.cup.match.Half;
-import ie.carneyd.world.cup.match.update.GoalUpdateType;
 import java.time.LocalDateTime;
 
 /**

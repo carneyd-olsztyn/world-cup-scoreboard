@@ -10,7 +10,5 @@ package ie.carneyd.world.cup.match.update;
  */
 public enum GoalUpdateType {
     HOME_GOAL_ALLOWED,
-//    HOME_GOAL_DISALLOWED,
-    AWAY_GOAL_ALLOWED,
-//    AWAY_GOAL_DISALLOWED,
+    AWAY_GOAL_ALLOWED
 }

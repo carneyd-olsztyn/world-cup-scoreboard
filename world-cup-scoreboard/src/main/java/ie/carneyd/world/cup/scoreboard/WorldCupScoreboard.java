@@ -24,6 +24,10 @@ public class WorldCupScoreboard {
         return currentMatches;
     }
     
+    public List<Match> getCompletedMatches() {
+        return completedMatches;
+    }
+    
     public void startMatch(Team homeTeam, Team awayTeam) {
         Match match = new Match(homeTeam, awayTeam);
         
@@ -42,6 +46,18 @@ public class WorldCupScoreboard {
         List<Match> sortedMatches = matches.stream().sorted(new MatchComparator()).collect(Collectors.toList());
         
         return sortedMatches;
+    }
+    
+    public void printFullScoreboard(List<Match> matches) {
+        for(Match match : matches) {
+            System.out.println(match.toFullString());
+        }
+    }
+    
+    public void printScoreboard(List<Match> matches) {
+        for(Match match : matches) {
+            System.out.println(match.toString());
+        }
     }
 
     public static void main(String[] args) throws MatchException {

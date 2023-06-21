@@ -9,19 +9,6 @@ package ie.carneyd.world.cup.match;
  * @author Acer
  */
 public enum Half {
-    FIRST_HALF(1),
-    SECOND_HALF(2);
-    
-    private Half(final int halfNumber) {
-      this.halfNumber = halfNumber;
-    }
-    
-    private int halfNumber;
-    
-    public int getHalfNumber() {
-        return halfNumber;
-    }
-    public void setHalfNumber(int halfNumber) {
-        this.halfNumber = halfNumber;
-    }
+    FIRST_HALF,
+    SECOND_HALF
 }
