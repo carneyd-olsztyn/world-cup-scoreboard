@@ -4,7 +4,7 @@
  */
 package ie.carneyd.world.cup.scoreboard;
 
-import ie.carneyd.world.cup.Team;
+import ie.carneyd.world.cup.team.Team;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

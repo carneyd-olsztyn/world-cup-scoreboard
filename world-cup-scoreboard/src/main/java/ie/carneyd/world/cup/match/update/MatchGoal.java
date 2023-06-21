@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ie.carneyd.world.cup;
+package ie.carneyd.world.cup.match.update;
 
+import ie.carneyd.world.cup.match.Half;
+import ie.carneyd.world.cup.match.update.GoalUpdateType;
 import java.time.LocalDateTime;
 
 /**
