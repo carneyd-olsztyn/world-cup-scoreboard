@@ -374,6 +374,7 @@ public class WorldCupScoreboardTest {
                 .incrementAwayScore(11, "Quagliarella", 
                         matches.get(0).getSecondHalfStart().plusMinutes(23));
         
+        // Run backwards as we are taking the values off the list in this loop
         for(int i = matches.size() - 1; i >= 0; i--) {
             worldCupScoreboard.finishMatch(matches.get(i));
         }
@@ -433,6 +434,7 @@ public class WorldCupScoreboardTest {
                 .incrementAwayScore(11, "Quagliarella", 
                         matches.get(0).getSecondHalfStart().plusMinutes(23));
         
+        // Run backwards as we are taking the values off the list in this loop
         for(int i = matches.size() - 1; i >= 0; i--) {
             worldCupScoreboard.finishMatch(matches.get(i));
         }
