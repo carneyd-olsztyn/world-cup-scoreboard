@@ -4,10 +4,12 @@
  */
 package ie.carneyd.world.cup.scoreboard;
 
+import ie.carneyd.world.cup.match.MatchException;
 import ie.carneyd.world.cup.team.Team;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -66,5 +68,13 @@ public class WorldCupScoreboardTest {
         scoreboard.startMatch(uruguay, paraguay);
         
         assertEquals(0, scoreboard.getCurrentMatches().get(0).getTotalScore());
+    }
+    
+    @Test
+    public void testFirstHalfNotSecondHalf() throws MatchException {
+        WorldCupScoreboard scoreboard = new WorldCupScoreboard();
+        scoreboard.startMatch(uruguay, paraguay);
+        
+        assertNull(scoreboard.getCurrentMatches().get(0).getSecondHalfStart());
     }
 }

@@ -10,6 +10,7 @@ import ie.carneyd.world.cup.team.Team;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Match {
     private final Team homeTeam, awayTeam;
     private final LocalDateTime matchStart;
     private LocalDateTime secondHalfStart, matchEnd;
-    ArrayList<MatchGoal> goals;
+    List<MatchGoal> goals;
     
     public Match(Team homeTeam, Team awayTeam) {
         homeScore = 0;
@@ -49,12 +50,20 @@ public class Match {
         return totalScore;
     }
 
+    public List<MatchGoal> getGoals() {
+        return goals;
+    }
+
     public LocalDateTime getMatchStart() {
         return matchStart;
     }
 
     public LocalDateTime getSecondHalfStart() {
         return secondHalfStart;
+    }
+
+    public LocalDateTime getMatchEnd() {
+        return matchEnd;
     }
     
     public void startSecondHalf() throws MatchException {
