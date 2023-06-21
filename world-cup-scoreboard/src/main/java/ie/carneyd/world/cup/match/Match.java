@@ -16,6 +16,8 @@ import java.util.ArrayList;
  * @author Acer
  */
 public class Match {
+    private final int HALF_LENGTH = 45;
+    
     private int homeScore, awayScore, totalScore;
     private final Team homeTeam, awayTeam;
     private final LocalDateTime matchStart;
@@ -129,7 +131,7 @@ public class Match {
             Duration duration = Duration.between(
                     ((secondHalfStart == null) ? matchStart : secondHalfStart), 
                     goal.getGoalTime());
-            long goalMinute = (secondHalfStart == null) ? duration.toMinutes() : duration.toMinutes() + 45;
+            long goalMinute = (secondHalfStart == null) ? duration.toMinutes() : duration.toMinutes() + HALF_LENGTH;
             sb.append("\n\t").append((goal.getGoalUpdateType() == GoalUpdateType.HOME_GOAL_ALLOWED) 
                     ? homeTeam.getShortName()
                     : awayTeam.getShortName()).append("\t").append(goal.getGoalscorerName()).append(" (").append(goal.getGoalscorerNumber()).append(")\t")
