@@ -33,4 +33,5 @@ Possibilities for Extension:
  - We haven't taken into account World Cup Groups here. There is no mention on the task. A group could be added to each team. We could then ensure that any match in the group stage was between two teams in that group, a MatchException could be thrown if that wasn't the case.
  - The list of completedMatches could be used to fill in group tables, as we have the relative scores (so we can assign points for victory/a draw, and also loot at goal difference / goals scored, and head to head record in case of a tie)
  - At the moment we only check for goals that they are scored after the first half starts or after the second half starts, ths could give rise to goals being scored extremely late. But we would need to think about this as we will not merely have 45 mins per half due to injury time.
- - Extend this to handle extra time and penalty shoot outs.
+ - Extend this to handle extra time and penalty shoot outs
+ - On display of the full scoreboard, a goal scored on the 47th minute could be scored in the second minute of the second half, or in the 2nd minute of first half injury time. We normally would write 45+2' for the latter. We could add this funstionality. Similarly 90+4' for the 94th minute in injury time.
