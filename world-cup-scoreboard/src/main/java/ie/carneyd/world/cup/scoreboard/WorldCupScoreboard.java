@@ -63,8 +63,6 @@ public class WorldCupScoreboard {
     }
 
     public static void main(String[] args) throws MatchException {
-        System.out.println("World Cup Scoreboard");
-        
         WorldCupScoreboard worldCupScoreboard = new WorldCupScoreboard();
         
         Team uruguay = new Team("URU", "Uruguay");
@@ -118,8 +116,6 @@ public class WorldCupScoreboard {
         
         List<Match> sortedMatches = worldCupScoreboard.generateSummaryList(worldCupScoreboard.getCurrentMatches());
         
-        for(Match match : sortedMatches) {
-            System.out.println(match.toFullString());
-        }
+        worldCupScoreboard.printFullScoreboard(sortedMatches);
     }
 }

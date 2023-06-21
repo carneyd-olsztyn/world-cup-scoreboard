@@ -27,6 +27,16 @@ Design Choices:
 		- A first half goal is scored before the match starts, or a second half goal is scored before the second half begins
 		- The match is not in progress.
 		
+To run this code:
+1. Add a main method class (there is one presently on WorldCupScoreboard which replicates the tests completeOneMatch_CompletedMatchesHasOneMatch and completeOneMatch_CurrentMatchesHasTwoMatches from WorldCupScoreboardTest)
+2. You will need to create teams, need a short name and a long one
+3. You can create a match using WorldCupScoreboard.startMatch
+4. This match will now be on the list WorldCupScoreboard.getCurrentMatches, you can now retrieve this match
+5. You can now add home or away goals, using Match.incrementHomeScore or Match.incrementAwayScore; these will be first half goals
+6. We will need to start the second half, using Match.startSecondHalf
+7. You can now add home or away goals, using Match.incrementHomeScore or Match.incrementAwayScore; these will be second half goals
+8. You can complete the match using WorldCupScoreboard.finishMatch
+9. You can retrieve lists of matches using WorldCupScoreboard.getCurrentMatches (ordered by time started), WorldCupScoreboard.getCompletedMatches and WorldCupScoreboard.generateSummaryList (which will order by total score descending, and time started descending, passing current matches in will fulfil operation 4 above). You can print to console all the scorelines (using WorldCupScoreboard.printScoreboard), or with the goalscorers and times (using WorldCupScoreboard.printFullScoreboard)
 
 
 Possibilities for Extension:
